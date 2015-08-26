@@ -45,7 +45,25 @@
        {
            $GLOBALS['DB']->exec("INSERT INTO checkout (patron_id, copy_id)
            VALUES ({$this->id}, {$copy_id})");
+           $date = date('Y-m-d');
+           $GLOBALS['DB']->exec("INSERT INTO history (patron_id, copy_id, check_out_date) VALUES ({$this->id}, {$copy_id}, {$date})");
        }
+
+       function getHistory()
+       {
+           $returned_records = $GLOBALS['DB']->query("SELECT * FROM history");
+
+           $records = array();
+           foreach ($returned_records as $record) {
+               $patron_id = $record["patron_id"];
+               $copy_id = $record["copy_id"];
+               $checkout_date = $record["checkout_date"];
+               $new_record = new Record($patron_id, $copy_id, $checkout_date, $id);
+               array_push($records, $new_record);
+           }
+           return $records;
+       }
+
 
        function getCopy()
        {
