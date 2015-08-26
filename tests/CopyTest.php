@@ -44,6 +44,19 @@
            $this->assertEquals($id, $result);
         }
 
+        function testGetDueDate()
+        {
+            //Arrange
+           $book_id = 1;
+           $due_date = "2015-12-12";
+           $id = 2;
+           $test_copy = new Copy($book_id, $due_date, $id);
+           //Act
+           $result = $test_copy->getDueDate();
+           //Assert
+           $this->assertEquals($due_date, $result);
+        }
+
         function testsave()
         {
             //Arrange
@@ -68,7 +81,7 @@
            $test_copy2->save();
            //Act
            $result = Copy::getAll();
-           
+
            //Assert
            $this->assertEquals([$test_copy, $test_copy2], $result);
         }
@@ -89,7 +102,7 @@
            //Assert
            $this->assertEquals([], $result);
         }
-        function testUpdate()
+        function testUpdateBookId()
         {
             //Arrange
            $book_id = 1;
@@ -104,6 +117,24 @@
            //Assert
            $this->assertEquals($test_copy->getBookId(), $new_book_id);
         }
+
+        function testUpdateDueDate()
+        {
+            //Arrange
+           $book_id = 1;
+           $due_date = "2015-12-12";
+           $test_copy = new Copy($book_id, $due_date);
+           $test_copy->save();
+
+           $new_due_date = "2012-21-21";
+
+           //Act
+           $test_copy->updateDueDate($new_due_date);
+
+           //Assert
+           $this->assertEquals($test_copy->getDueDate(), $new_due_date);
+        }
+
 
         function testfind()
         {
