@@ -120,5 +120,33 @@
            //Assert
            $this->assertEquals($test_student2, $result);
         }
+
+        function testGetBook()
+        {
+            //Arrange
+           $title = "Title";
+           $id = 1;
+           $test_book = new Book($title, $id);
+           $test_book->save();
+
+           $title2 = "Other Title";
+           $id2 = 2;
+           $test_book2 = new Book($title2, $id2);
+           $test_book2->save();
+
+           $name = "Ping Pong";
+           $id2 = 1;
+           $test_author = new Author($name, $id2);
+           $test_author->save();
+
+
+           //Act
+           $test_author->addBook($test_book->getId());
+           $test_author->addBook($test_book2->getId());
+
+           //Assert
+           $this->assertEquals($test_author->getBook(), [$test_book, $test_book2]);
+
+        }
     }
  ?>

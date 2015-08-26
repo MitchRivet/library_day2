@@ -40,6 +40,30 @@
            $this->setName($new_name);
        }
 
+       //Add/Get Books
+       function addBook($book_id)
+       {
+           $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id)
+           VALUES ({$this->id}, {$book_id})");
+       }
+
+       function getBook()
+       {
+           $returned_books = $GLOBALS['DB']->query("SELECT books.* FROM authors
+           JOIN authors_books ON (authors.id = authors_books.author_id) JOIN books
+           ON (books.id = authors_books.book_id)
+           WHERE authors.id = {$this->getId()}");
+
+           $books = array();
+           foreach ($returned_books as $book) {
+               $title = $book["title"];
+               $id = $book["id"];
+               $new_book = new Book($title, $id);
+               array_push($books, $new_book);
+           }
+           return $books;
+       }
+
 
        /////////////////STATIC FUNCTIONS/////////////////////////
 
@@ -77,6 +101,8 @@
            }
            return $found_author;
        }
+
+
 
     }
  ?>
