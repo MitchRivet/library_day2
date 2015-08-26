@@ -101,5 +101,23 @@
            //Assert
            $this->assertEquals($test_book->getTitle(), $new_title);
         }
+
+        function find()
+        {
+            //Arrange
+           $title = "Title";
+           $id = 1;
+           $test_book = new Book($title, $id);
+
+           $title2 = "Different Title";
+           $id2 = 2;
+           $test_book2 = new Book($title2, $id2);
+
+           //Act
+           $result = Book::find($test_book2->getId());
+
+           //Assert
+           $this->assertEquals($test_student2, $result);
+        }
     }
  ?>

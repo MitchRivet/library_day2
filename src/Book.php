@@ -31,8 +31,21 @@
             $GLOBALS['DB']->exec("INSERT INTO books (title) VALUES ('{$this->getTitle()}')");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
-        static function getAll()
-        {
+
+       //Update
+       function update($new_title)
+       {
+           $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}'
+           WHERE id = {$this->getId()}");
+           $this->setTitle($new_title);
+       }
+
+
+       /////////////////STATIC FUNCTIONS/////////////////////////
+
+
+       static function getAll()
+       {
             $returned_books = $GLOBALS['DB']->query("SELECT * FROM books");
             $books = array();
             foreach($returned_books as $book) {
@@ -43,17 +56,26 @@
             }
             return $books;
         }
+
+
         //Delete All
        static function deleteAll()
        {
            $GLOBALS['DB']->exec("DELETE FROM books");
        }
-       //Update
-       function update($new_title)
+
+       //Find
+       static function find($search_id)
        {
-           $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}'
-           WHERE id = {$this->getId()}");
-           $this->setTitle($new_title);
+           $found_book = null;
+           $books = Book::getAll();
+           foreach($books as $book) {
+               $book_id = $book->getId();
+               if ($book_id == $search_id) {
+                   $found_book = $book;
+               }
+           }
+           return $found_book;
        }
 
     }
