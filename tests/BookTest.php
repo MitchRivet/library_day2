@@ -86,5 +86,20 @@
            //Assert
            $this->assertEquals([], $result);
         }
+        function testUpdate()
+        {
+            //Arrange
+           $title = "Title";
+           $test_book = new Book($title);
+           $test_book->save();
+
+           $new_title = "New Title";
+
+           //Act
+           $test_book->update($new_title);
+
+           //Assert
+           $this->assertEquals($test_book->getTitle(), $new_title);
+        }
     }
  ?>
