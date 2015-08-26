@@ -35,8 +35,9 @@
         {
             //Arrange
            $book_id = 1;
-           $id = 1;
-           $test_copy = new Copy($book_id, $id);
+           $due_date = null;
+           $id = 2;
+           $test_copy = new Copy($book_id, $due_date, $id);
            //Act
            $result = $test_copy->getId();
            //Assert
@@ -67,6 +68,7 @@
            $test_copy2->save();
            //Act
            $result = Copy::getAll();
+           
            //Assert
            $this->assertEquals([$test_copy, $test_copy2], $result);
         }
@@ -97,7 +99,7 @@
            $new_book_id = 3;
 
            //Act
-           $test_copy->update($new_book_id);
+           $test_copy->updateBookId($new_book_id);
 
            //Assert
            $this->assertEquals($test_copy->getBookId(), $new_book_id);
@@ -107,13 +109,11 @@
         {
             //Arrange
            $book_id = 1;
-           $id = 1;
-           $test_copy = new Copy($book_id, $id);
+           $test_copy = new Copy($book_id);
            $test_copy->save();
 
            $book_id2 = 2;
-           $id2 = 2;
-           $test_copy2 = new Copy($book_id2, $id2);
+           $test_copy2 = new Copy($book_id2);
            $test_copy2->save();
 
            //Act

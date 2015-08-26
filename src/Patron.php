@@ -57,8 +57,9 @@
            $copies = array();
            foreach ($returned_copies as $copy) {
                $book_id = $copy["book_id"];
+               $due_date = $copy["due_date"];
                $id = $copy["id"];
-               $new_copy = new Copy($book_id, $id);
+               $new_copy = new Copy($book_id, $due_date, $id);
                array_push($copies, $new_copy);
            }
            return $copies;

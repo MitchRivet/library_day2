@@ -125,18 +125,17 @@
         {
             //Arrange
            $copy_id = 1;
-           $id = 1;
-           $test_copy = new Copy($copy_id, $id);
+           $test_copy = new Copy($copy_id);
            $test_copy->save();
 
            $copy_id2 = 2;
            $id2 = 2;
-           $test_copy2 = new Copy($copy_id2, $id2);
+           $test_copy2 = new Copy($copy_id2);
            $test_copy2->save();
 
            $name = "Ping Pong";
            $id2 = 1;
-           $test_patron = new Patron($name, $id2);
+           $test_patron = new Patron($name);
            $test_patron->save();
 
 
