@@ -1,7 +1,7 @@
 <?php
 
     require_once "src/Book.php";
-    // require_once "src/Author.php";
+    require_once "src/Author.php";
 
         /**
     * @backupGlobals disabled
@@ -18,6 +18,7 @@
         protected function tearDown()
         {
             Book::deleteAll();
+            Author::deleteAll();
         }
         function testGetTitle()
         {
@@ -102,22 +103,50 @@
            $this->assertEquals($test_book->getTitle(), $new_title);
         }
 
-        function find()
+        function testfind()
         {
             //Arrange
            $title = "Title";
            $id = 1;
            $test_book = new Book($title, $id);
+           $test_book->save();
 
            $title2 = "Different Title";
            $id2 = 2;
            $test_book2 = new Book($title2, $id2);
+           $test_book2->save();
 
            //Act
            $result = Book::find($test_book2->getId());
 
            //Assert
-           $this->assertEquals($test_student2, $result);
+           $this->assertEquals($test_book2, $result);
+        }
+        function testGetAuthor()
+        {
+            //Arrange
+           $title = "Title";
+           $id = 1;
+           $test_book = new Book($title, $id);
+           $test_book->save();
+
+           $name = "Ping Pong";
+           $id2 = 1;
+           $test_author = new Author($name, $id2);
+           $test_author->save();
+
+           $name2 = "Ding Dong";
+           $id3 = 2;
+           $test_author2 = new Author($name2, $id3);
+           $test_author2->save();
+
+           //Act
+           $test_book->addAuthor($test_author->getId());
+           $test_book->addAuthor($test_author2->getId());
+
+           //Assert
+           $this->assertEquals($test_book->getAuthor(), [$test_author, $test_author2]);
+
         }
     }
  ?>
