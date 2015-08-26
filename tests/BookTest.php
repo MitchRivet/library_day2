@@ -15,6 +15,10 @@
 
     class BookTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Book::deleteAll();
+        }
         function testGetTitle()
         {
             //Arrange
@@ -63,7 +67,7 @@
            //Act
            $result = Book::getAll();
            //Assert
-           $this->assertEquals([$test_book, $test_book2] $result);
+           $this->assertEquals([$test_book, $test_book2], $result);
         }
 
         function testDeleteAll()
@@ -77,9 +81,10 @@
            $test_book2 = new Book($title2);
            $test_book2->save();
            //Act
-           $result = Book::deleteAll();
+           Book::deleteAll();
+           $result = Book::getAll();
            //Assert
-           $this->assertEquals([] $result);
+           $this->assertEquals([], $result);
         }
     }
  ?>
