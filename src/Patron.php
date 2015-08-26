@@ -49,13 +49,13 @@
 
        function getCopy()
        {
-           $returned_$copies = $GLOBALS['DB']->query("SELECT copies.* FROM patrons
+           $returned_copies = $GLOBALS['DB']->query("SELECT copies.* FROM patrons
            JOIN checkout ON (patrons.id = checkout.patron_id) JOIN copies
            ON (copies.id = checkout.copy_id)
            WHERE patrons.id = {$this->getId()}");
 
            $copies = array();
-           foreach ($returned_$copies as $copy) {
+           foreach ($returned_copies as $copy) {
                $book_id = $copy["book_id"];
                $id = $copy["id"];
                $new_copy = new Copy($book_id, $id);

@@ -28,14 +28,14 @@
         //Save method
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ('{$this->getBookId()}')");
+            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$this->getBookId()})");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
        //Update
        function update($new_book_id)
        {
-           $GLOBALS['DB']->exec("UPDATE copies SET book_id = '{$new_book_id}'
+           $GLOBALS['DB']->exec("UPDATE copies SET book_id = {$new_book_id}
            WHERE id = {$this->getId()}");
            $this->setBookId($new_book_id);
        }
