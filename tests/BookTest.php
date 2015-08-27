@@ -141,11 +141,13 @@
            $test_author2->save();
 
            //Act
-           $test_book->addAuthor($test_author->getId());
-           $test_book->addAuthor($test_author2->getId());
+           $test_book->addAuthor($test_author);
+           $test_book->addAuthor($test_author2);
+           $result = $test_book->getAuthor();
+           var_dump($result);
 
            //Assert
-           $this->assertEquals($test_book->getAuthor(), [$test_author, $test_author2]);
+           $this->assertEquals([$test_author, $test_author2], $result);
 
         }
     }

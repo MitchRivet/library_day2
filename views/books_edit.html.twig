@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Book Catalogue</title>
+</head>
+<body>
+    <h1>Book Catalogue</h1>
+    <h4><a href="/">Home</a>
+    <br>
+    <br>
+        <hr>
+
+    <form action="/add_books" method = "post">
+        <div class="form-group">
+            <label for = "title">Enter the book title:</label>
+            <input id="title" name="title" type="text" required>
+
+            <label for ="name">Enter the author name:</label>
+            <input id ="name" name="name" type="text" required>
+
+            <button type="submit" class="btn-success">Add Title</button>
+        </div>
+    </form>
+
+    {% if books is not empty %}
+
+        {% for book in books %}
+
+        <li><h4><a href="/books/{{ book.getId }}">{{ book.getTitle }} </a></h4>
+            {% set authors = book.getAuthor  %}
+                {% for author in authors %}
+                <p>{{ author.getName }}</p>
+                {% endfor %}
+        </li>
+        {% endfor %}
+
+    {% else %}
+    <h4>There are currently no books!</h4>
+
+    {% endif %}
+</body>
+</html>

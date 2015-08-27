@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Book Page</title>
+    </head>
+    <body>
+        <h1>{{ book.getTitle }}</h1>
+
+        <h2>by {% for writer in author %}
+            {{ writer.getName }}</h2>
+            {% endfor %}
+
+
+    </body>
+</html>

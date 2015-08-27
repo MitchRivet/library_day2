@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title> List of current books! </title>
+    </head>
+    <body>
+
+        <h1> Hello, {{ patron.getName }} ! </h1>
+
+        <p>Here are the Library's books!</p>
+
+        {% if books is not empty %}
+        <ul>
+            {% for book in books %}
+                <li><h4><a href="/books/{{ book.getId }}">{{ book.getTitle }}</a></h4>
+            
+                </li>
+            {% endfor %}
+
+        {% else %}
+                <h4>There are currently no books!</h4>
+
+        {% endif %}
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
