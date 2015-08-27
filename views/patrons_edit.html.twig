@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Edit a Patron</title>
+    </head>
+    <body>
+        <h1>Patrons</h1>
+        <h4><a href="/">Home</a>
+        <br>
+        <br>
+            <hr>
+
+        <form action="/patrons_edit" method = "post">
+            <div class="form-group">
+                <label for = "name">Enter the Patron Name:</label>
+                <input id="name" name="name" type="text" required>
+
+
+                <button type="submit" class="btn-success">Add Patron</button>
+            </div>
+        </form>
+
+        {% if patrons is not empty %}
+
+            {% for patron in patrons %}
+
+            <li><h4><a href="/patrons/{{ patron.getId }}">{{ patron.getName }} </a></h4>
+
+
+            {% endfor %}
+
+        {% else %}
+        <h3>Patron List:</h3>
+        <h4>Nobody likes your library!</h4>
+
+        {% endif %}
+
+    </body>
+</html>

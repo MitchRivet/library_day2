@@ -68,6 +68,7 @@
            VALUES ({$patron_id}, {$this->id})");
        }
 
+       // get patron via the join table called "aothors_books"
        function getPatron()
        {
            $returned_patrons = $GLOBALS['DB']->query("SELECT patrons.* FROM patrons
@@ -88,7 +89,7 @@
 
        /////////////////STATIC FUNCTIONS/////////////////////////
 
-
+       // get all 
        static function getAll()
        {
             $returned_copies = $GLOBALS['DB']->query("SELECT * FROM copies");

@@ -88,6 +88,12 @@
            $GLOBALS['DB']->exec("DELETE FROM books");
        }
 
+       function deleteBook()
+    {
+      $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+      $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+    }
+
        //Find
        static function find($search_id)
        {
